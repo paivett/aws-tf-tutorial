@@ -42,6 +42,10 @@ resource "aws_s3_bucket" "a_website_bucket" {
     error_document = "error.html"
   }
 
+  versioning {
+    enabled = true
+  }
+
   tags = {
     Name = "Demo public bucket"
   }
