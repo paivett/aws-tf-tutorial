@@ -1,0 +1,20 @@
+{
+    "Id" : "Policy16371717404862",
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "Stmt1637171737101",
+        "Action" : [
+          "s3:GetObject"
+        ],
+        "Effect" : "Allow",
+        "Resource" : "arn:aws:s3:::${bucket_name}/*",
+        "Principal" : "*",
+        "Condition" : {
+          "IpAddress" : {
+            "aws:SourceIp" : "${ip_address}/32"
+          }
+        }
+      }
+    ]
+  }
