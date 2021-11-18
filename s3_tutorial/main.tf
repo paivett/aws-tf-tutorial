@@ -46,10 +46,25 @@ resource "aws_s3_bucket" "a_website_bucket" {
     enabled = true
   }
 
+  logging {
+    target_bucket = aws_s3_bucket.an_access_log_bucket.id
+    target_prefix = "log/"
+  }
+
   tags = {
     Name = "Demo public bucket"
   }
 }
+
+resource "aws_s3_bucket" "an_access_log_bucket" {
+  bucket = "${var.owner}-demo-bucket-access-log"
+  acl    = "private"
+
+  tags = {
+    Name = "Demo access log bucket"
+  }
+}
+
 
 resource "aws_s3_bucket_public_access_block" "all_blocked" {
   bucket = aws_s3_bucket.a_private_bucket.id
